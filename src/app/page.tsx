@@ -1,6 +1,22 @@
+'use server'
+import Ssr from "@/helper/ssr";
 import Image from "next/image";
 
-export default function Home() {
+interface ApiResponse {
+  data: {
+    user: object[];
+  };
+}
+
+ export default async function Home() {
+  // const heads = headers();
+
+ const api: string = "api/test";  // ✅
+  const res = await Ssr<ApiResponse>(api);
+  const user: object[] =  res.data.user
+  console.log(user);
+
+  
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
